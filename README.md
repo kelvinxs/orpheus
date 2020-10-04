@@ -1,6 +1,6 @@
 # orpheus
 
-A new Flutter project.
+A simple game being developed in Flutter as a graduation project
 
 ## Getting Started
 
