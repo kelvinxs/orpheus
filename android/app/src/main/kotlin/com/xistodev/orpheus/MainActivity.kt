@@ -1,4 +1,4 @@
-package com.example.orpheus
+package com.xistodev.orpheus
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity
