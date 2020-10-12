@@ -1,4 +1,5 @@
 class Nota {
+  int id;
   String nome;
   String cifra;
   int posicaoEscalaSol;
@@ -6,6 +7,7 @@ class Nota {
   int nivel;
 
   Nota({
+    this.id = 0,
     this.nome,
     this.nivel,
     this.cifra,

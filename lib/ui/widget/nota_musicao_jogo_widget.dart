@@ -29,8 +29,19 @@ class _State extends State<NotaMusicaoJogoWidget> {
     return Container(
       width: widget.width,
       height: widget.height,
-      color: Colors.cyan,
-      child: Center(
+      decoration: BoxDecoration(
+          color: Colors.indigo.shade600.withOpacity(.50),
+          shape: BoxShape.circle,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.indigo.shade600.withOpacity(0.75),
+              spreadRadius: 3,
+              blurRadius: 3,
+              offset: Offset(0, 0),
+            ),
+          ]),
+      child: Container(
+        alignment: Alignment.center,
         child: _conteudo(),
       ),
     );
@@ -38,10 +49,28 @@ class _State extends State<NotaMusicaoJogoWidget> {
 
   Widget _conteudo() {
     if (widget.tipoQuestao == TipoQuestao.PARTITURA_CIFRA) {
-      return Image.asset(AppAssets.image(widget.nota.imagemRes));
+      return Image.asset(
+        AppAssets.image(widget.nota.imagemRes),
+        width: widget.width * .65,
+        height: widget.height * .65,
+      );
     } else if (widget.tipoQuestao == TipoQuestao.NOME_CIFRA) {
-      return Text(widget.nota.nome.toUpperCase());
+      return Text(
+        widget.nota.nome.toUpperCase(),
+        style: TextStyle(
+          fontSize: 20,
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+      );
     }
-    return Text(widget.nota.cifra);
+    return Text(
+      widget.nota.cifra,
+      style: TextStyle(
+        fontSize: 20,
+        color: Colors.white,
+        fontWeight: FontWeight.bold,
+      ),
+    );
   }
 }
