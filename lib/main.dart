@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:orpheus/data/model/enum/tipo_jogo.dart';
+import 'package:orpheus/data/model/enum/tipo_questao.dart';
+import 'package:orpheus/data/model/nota_tentativa.dart';
+import 'package:orpheus/data/model/resposta.dart';
+import 'package:orpheus/data/model/tentativa.dart';
 import 'package:orpheus/ui/feature/home/home_page.dart';
 
 main() async {
@@ -24,6 +31,7 @@ class MyApp extends StatelessWidget {
     ]);
     SystemChrome.setSystemUIOverlayStyle(
         SystemUiOverlayStyle(statusBarColor: Colors.blueAccent));
+    SystemChrome.setEnabledSystemUIOverlays([]);
 
     return MaterialApp(
       title: 'Orpheus',
@@ -32,7 +40,40 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomePage(),
+      home: SplashPage(),
     );
+  }
+}
+
+class SplashPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    Hive.initFlutter().then((value) async {
+      if (!Hive.isAdapterRegistered(5)) {
+        Hive
+          ..registerAdapter(TipoJogoAdapter())
+          ..registerAdapter(TipoQuestaoAdapter())
+          ..registerAdapter(NotaTentativaAdapter())
+          ..registerAdapter(RespostaAdapter())
+          ..registerAdapter(TentativaAdapter());
+      }
+      await Future.delayed(Duration(milliseconds: 1250));
+      _redirect(context);
+    });
+
+    return Scaffold(
+      body: SafeArea(
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
+      ),
+    );
+  }
+
+  Future<void> _redirect(BuildContext context) async {
+    await Future.delayed(Duration(seconds: 3), () {});
+
+    Navigator.pushAndRemoveUntil(context,
+        MaterialPageRoute(builder: (context) => HomePage()), (route) => false);
   }
 }

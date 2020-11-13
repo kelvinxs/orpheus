@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "944219617334",
+    "firebase_url": "https://orpheus-f3d8f.firebaseio.com",
+    "project_id": "orpheus-f3d8f",
+    "storage_bucket": "orpheus-f3d8f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:944219617334:android:9185cb826e2918ee15c097",
+        "android_client_info": {
+          "package_name": "com.xistodev.orpheus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "944219617334-pjc8bm6licoj98ei3ht0p5g4euturmc3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFEqagcGs-J6_s7ywBgkvQs_QdDft-3yQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "944219617334-pjc8bm6licoj98ei3ht0p5g4euturmc3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -10,6 +10,7 @@ class NotaMusicaoJogoWidget extends StatefulWidget {
   Nota nota;
   TipoJogo tipoJogo;
   TipoQuestao tipoQuestao;
+  Nota notaSelecionada;
 
   NotaMusicaoJogoWidget(
     this.nota, {
@@ -17,6 +18,7 @@ class NotaMusicaoJogoWidget extends StatefulWidget {
     this.height = double.infinity,
     this.tipoJogo = TipoJogo.HISTORIA,
     this.tipoQuestao = TipoQuestao.PARTITURA_CIFRA,
+    this.notaSelecionada,
   });
 
   @override
@@ -26,20 +28,25 @@ class NotaMusicaoJogoWidget extends StatefulWidget {
 class _State extends State<NotaMusicaoJogoWidget> {
   @override
   Widget build(BuildContext context) {
+    var cor = Colors.lightBlue.shade400;
+    if (widget.notaSelecionada != null) {
+      if (widget.notaSelecionada.id == widget.nota.id) {
+        cor = Colors.teal.shade400;
+      } else {
+        cor = Colors.redAccent.shade200;
+      }
+    }
     return Container(
       width: widget.width,
       height: widget.height,
       decoration: BoxDecoration(
-          color: Colors.indigo.shade600.withOpacity(.50),
-          shape: BoxShape.circle,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.indigo.shade600.withOpacity(0.75),
-              spreadRadius: 3,
-              blurRadius: 3,
-              offset: Offset(0, 0),
-            ),
-          ]),
+        color: cor.withOpacity(.85),
+        shape: BoxShape.circle,
+        border: Border.all(
+          color: Color(0xffffffff).withOpacity(.85),
+          width: 5,
+        ),
+      ),
       child: Container(
         alignment: Alignment.center,
         child: _conteudo(),
@@ -51,8 +58,9 @@ class _State extends State<NotaMusicaoJogoWidget> {
     if (widget.tipoQuestao == TipoQuestao.PARTITURA_CIFRA) {
       return Image.asset(
         AppAssets.image(widget.nota.imagemRes),
-        width: widget.width * .65,
+        width: widget.width * .75,
         height: widget.height * .65,
+        color: Colors.white,
       );
     } else if (widget.tipoQuestao == TipoQuestao.NOME_CIFRA) {
       return Text(

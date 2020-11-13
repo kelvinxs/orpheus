@@ -2,8 +2,7 @@ import 'package:orpheus/data/model/enum/tipo_questao.dart';
 import 'package:orpheus/data/model/nota.dart';
 
 class Questao {
-  int idTentativa;
-  int numero;
+  String idTentativa;
   int nivel;
   Nota notaPrincipal;
   List<Nota> opcoes;
@@ -11,10 +10,10 @@ class Questao {
   int numAcertoNota;
   int numTentativasNota;
   int progressoFase;
+  int idFase;
 
   Questao({
-    this.idTentativa = 0,
-    this.numero = 1,
+    this.idTentativa,
     this.nivel,
     this.notaPrincipal,
     this.tipo,

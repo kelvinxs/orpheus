@@ -7,6 +7,7 @@ import 'package:orpheus/data/model/questao.dart';
 import 'package:orpheus/resources/app_assets.dart';
 import 'package:orpheus/ui/feature/jogo/bloc/jogo_bloc.dart';
 import 'package:orpheus/ui/widget/nota_musicao_jogo_widget.dart';
+import 'package:orpheus/utils/size_util.dart';
 
 class JogoPage extends StatefulWidget {
   int nivel;
@@ -42,10 +43,13 @@ class _State extends State<JogoPage> {
       body: SafeArea(
         child: Container(
           decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(AppAssets.image("background_gameplay.png")),
-              alignment: Alignment.center,
-              fit: BoxFit.cover,
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color(0xff203409),
+                Color(0xff111b04),
+              ],
             ),
           ),
           child: LayoutBuilder(
@@ -58,6 +62,27 @@ class _State extends State<JogoPage> {
                   children: [
                     _batalha(),
                     Expanded(child: _acoes()),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Container(
+                          margin: EdgeInsets.all(10.width),
+                          padding: EdgeInsets.all(10.width),
+                          decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(.85),
+                            borderRadius: BorderRadius.circular(100),
+                          ),
+                          child: Icon(
+                            Icons.exit_to_app_rounded,
+                            color: Colors.white,
+                            size: 30.width,
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 );
               }
@@ -261,6 +286,7 @@ class _State extends State<JogoPage> {
                 height: menorTamanho,
                 tipoQuestao: questao.tipo,
                 tipoJogo: widget.tipoJogo,
+                notaSelecionada: _notaSelecionada,
               ),
               Padding(padding: EdgeInsets.symmetric(vertical: 10)),
               IntrinsicHeight(
@@ -299,8 +325,6 @@ class _State extends State<JogoPage> {
           fontSize: 16,
         ),
       );
-    } else if (questao.tipo == TipoQuestao.CIFRA_PARTITURA) {
-      conteudo = Image.asset(AppAssets.image(nota.imagemRes));
     } else {
       conteudo = Text(
         nota.cifra,
@@ -322,7 +346,7 @@ class _State extends State<JogoPage> {
       width = maxWidth;
     }
 
-    var color = Colors.indigo.shade400;
+    var color = Colors.lightBlue.shade400;
 
     if (_notaSelecionada != null && _notaSelecionada.id == nota.id) {
       if (_notaSelecionada.id == questao.notaPrincipal.id) {
@@ -362,16 +386,12 @@ class _State extends State<JogoPage> {
           child: conteudo,
         ),
         decoration: BoxDecoration(
-          color: color,
+          color: color.withOpacity(.85),
           borderRadius: BorderRadius.all(Radius.circular(5)),
-          boxShadow: [
-            BoxShadow(
-              color: color.withOpacity(0.75),
-              spreadRadius: 0,
-              blurRadius: 3,
-              offset: Offset(0, 0),
-            ),
-          ],
+          border: Border.all(
+            color: Colors.white.withOpacity(.85),
+            width: 2,
+          ),
         ),
       ),
     );
@@ -404,7 +424,7 @@ class _State extends State<JogoPage> {
               },
               child: Text("Tentar Novamente"),
               color: Colors.indigo,
-              padding: EdgeInsets.all(10),
+              padding: EdgeInsets.all(15.width),
               textColor: Colors.white,
             ),
           ),
@@ -416,7 +436,7 @@ class _State extends State<JogoPage> {
               },
               child: Text("Voltar"),
               color: Colors.deepOrange,
-              padding: EdgeInsets.all(10),
+              padding: EdgeInsets.all(15.width),
               textColor: Colors.white,
             ),
           ),
