@@ -49,9 +49,6 @@ android {
     signingConfigs {
         release {
             storeFile file('keystore.jks')
-            storePassword "lewdpeach7"
-            keyAlias "Tcc"
-            keyPassword "lewdpeach8"
         }
     }
 
